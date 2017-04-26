@@ -1,0 +1,14 @@
+#include <iostream>
+
+using namespace std;
+
+
+int main()
+{
+	char* g = new char[];
+
+	cin >> g; // <- jesli podam wiecej niz 7 znakow to strlen wywala program. dlaczego ?
+	cout << g << endl;
+	cout << strlen(g);
+	return 0;
+}
