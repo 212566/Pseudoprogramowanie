@@ -1,0 +1,56 @@
+#include <string>
+#include <iostream>
+#include <memory> // std::auto_ptr
+#include <map>
+#include <string>
+using namespace std;
+
+class User {
+public:
+    virtual void get_price() const = 0;
+    virtual ~User() {};
+};
+ 
+class Administrator: public User {
+public:
+    virtual void get_price() const {
+        cout << "Jestem adminem" << endl;
+    }
+};
+ class PrivilegedUser: public User {
+public:
+    virtual void get_price() const {
+        cout << "Jestem uprzywilejowanym uzytkownikiem " << endl;
+    }
+};
+ class RegularUser: public User {
+public:
+    virtual void get_price() const {
+        cout << "Jestem zwyklym uzytkownikiem" << endl;
+    }
+};
+class UserFactory {
+public:
+    virtual User* create() = 0;
+};
+class AdministratorFactory : public UserFactory
+{
+public:
+    User* create()
+	{
+		return  new Administrator;
+	}
+};
+//usage
+int main() {
+ 
+	map<string, UserFactory*> ProductsList;
+
+	ProductsList.insert(pair<string,UserFactory*>("Administrator", new AdministratorFactory));
+
+	string co = "Administrator";
+
+	User* x = ProductsList[co]->create();
+	x->get_price(); 
+	delete x;
+}
