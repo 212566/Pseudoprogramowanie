@@ -41,7 +41,24 @@ public:
 		return  new Administrator;
 	}
 };
-//usage
+
+class PrivilegedUserFactory : public UserFactory
+{
+public:
+	User* create()
+	{
+		return new PrivilegedUserFactory;
+	}
+};
+
+class RegularUser : public UserFactory
+{
+public:
+	User* create()
+	{
+		return new RegularUserl
+	}
+};
 int main() {
  
 	map<string, UserFactory*> ProductsList;
