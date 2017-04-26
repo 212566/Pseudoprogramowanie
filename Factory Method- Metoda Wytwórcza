@@ -3,35 +3,44 @@
 #include <map>
 using namespace std;
 
-class User {
+class User {        // klasa abstrakcyjna
 public:
 	virtual void greet() const = 0;
 	virtual ~User() {};
 };
 
+
+
 class Administrator : public User {
 public:
-	virtual void greet() const {
+	void greet() const {
 		cout <<" Witam. Jestem adminem" << endl;
 	}
 };
+
 class PrivilegedUser : public User {
 public:
-	virtual void greet() const {
+	void greet() const {
 		cout << "Witam. Jestem uprzywilejowanym uzytkownikiem " << endl;
 	}
 };
+
 class RegularUser : public User {
 public:
-	virtual void greet() const {
+	void greet() const {
 		cout << "Witam. Jestem zwyklym uzytkownikiem" << endl;
 	}
 };
 
-class UserFactory {
+
+
+
+class UserFactory {            // klasa abstrakcyjna
 public:
 	virtual User* create() = 0;
 };
+
+
 
 class AdministratorFactory : public UserFactory
 {
