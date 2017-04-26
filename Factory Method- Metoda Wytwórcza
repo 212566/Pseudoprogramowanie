@@ -1,42 +1,42 @@
 #include <string>
 #include <iostream>
-#include <memory> // std::auto_ptr
 #include <map>
-#include <string>
 using namespace std;
 
 class User {
 public:
-    virtual void get_price() const = 0;
-    virtual ~User() {};
+	virtual void greet() const = 0;
+	virtual ~User() {};
 };
- 
-class Administrator: public User {
+
+class Administrator : public User {
 public:
-    virtual void get_price() const {
-        cout << "Jestem adminem" << endl;
-    }
+	virtual void greet() const {
+		cout <<" Witam. Jestem adminem" << endl;
+	}
 };
- class PrivilegedUser: public User {
+class PrivilegedUser : public User {
 public:
-    virtual void get_price() const {
-        cout << "Jestem uprzywilejowanym uzytkownikiem " << endl;
-    }
+	virtual void greet() const {
+		cout << "Witam. Jestem uprzywilejowanym uzytkownikiem " << endl;
+	}
 };
- class RegularUser: public User {
+class RegularUser : public User {
 public:
-    virtual void get_price() const {
-        cout << "Jestem zwyklym uzytkownikiem" << endl;
-    }
+	virtual void greet() const {
+		cout << "Witam. Jestem zwyklym uzytkownikiem" << endl;
+	}
 };
+
 class UserFactory {
 public:
-    virtual User* create() = 0;
+	virtual User* create() = 0;
 };
+
 class AdministratorFactory : public UserFactory
 {
 public:
-    User* create()
+	User* create()
 	{
 		return  new Administrator;
 	}
@@ -47,27 +47,32 @@ class PrivilegedUserFactory : public UserFactory
 public:
 	User* create()
 	{
-		return new PrivilegedUserFactory;
+		return new PrivilegedUser;
 	}
 };
 
-class RegularUser : public UserFactory
+class RegularUserFactory : public UserFactory
 {
 public:
 	User* create()
 	{
-		return new RegularUserl
+		return new RegularUser;
 	}
 };
 int main() {
- 
+
 	map<string, UserFactory*> ProductsList;
 
-	ProductsList.insert(pair<string,UserFactory*>("Administrator", new AdministratorFactory));
+	ProductsList.insert(pair<string, UserFactory*>("Administrator", new AdministratorFactory));
+	ProductsList.insert(pair<string, UserFactory*>("PrivilegedUser", new PrivilegedUserFactory));
+	ProductsList.insert(pair<string, UserFactory*>("RegularUser", new RegularUserFactory));
 
-	string co = "Administrator";
+	cout << " Podaj nazwe uzytkownika, ktorego chcesz stworzyc: ";
+	string co;
+	cin >> co;
+	
 
 	User* x = ProductsList[co]->create();
-	x->get_price(); 
+	x->greet();
 	delete x;
 }
