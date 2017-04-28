@@ -1,0 +1,29 @@
+ Time operator*(double m) 
+	 {
+		 Time result;
+		 long totalminutes = (minutes + hours * 60)*m;
+		 result.minutes = totalminutes % 60;
+		 result.hours = totalminutes / 60;
+		 return result;
+
+	 }
+   
+	 friend Time operator*(double m, const Time &t); // definicja pod mainem
+   
+   
+   
+Time operator*(double m, const Time &t)
+{
+	Time result;
+	long totalminutes = (t.minutes + t.hours * 60)*m;
+	result.minutes = totalminutes % 60;
+	result.hours = totalminutes / 60;
+	return result;
+}
+
+/*
+friend Time operator*(double m, const Time &t)    //  < ---------------------- jak to dziala, jak to powinno wyglądać itp. ?
+	{
+		return t*m;
+	}
+  */ 
