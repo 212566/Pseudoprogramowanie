@@ -26,4 +26,16 @@ friend Time operator*(double m, const Time &t)    //  < ---------------------- j
 	{
 		return t*m;
 	}
-  */ 
+  */
+  
+  PYTANIA:
+  
+  1. Time
+  2. stone
+  3. 
+  
+  
+  
+  
+  
+  
