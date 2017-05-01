@@ -32,7 +32,7 @@ friend Time operator*(double m, const Time &t)    //  < ---------------------- j
   
   1. Time
   2. stone
-  3. 
+  3. Jak przeciążać operatory tak, żeby nie musieć pisać dwa razy obszernej funkcji?
   
   
   
