@@ -1,0 +1,106 @@
+#include <iostream>
+using namespace std;
+#include <string>
+#include <array>
+#include <cstdio>
+
+class Instrument // klasa bazowa
+{
+protected:
+	char *przedrostek;
+	int a;
+	int b;
+	string name;
+public:
+	Instrument()
+	{
+		a = 0;
+		b = 0;
+		name = "";
+	}
+	virtual ~Instrument()
+	{
+		cout << "Destrukacja bazowa" << endl;
+	}
+	virtual void graj() = 0;
+	virtual void wyswietl() = 0;
+
+};
+
+
+class Gitara : public Instrument   // klasa pochodna
+{
+private:
+	int c;
+	
+	
+public:
+	Gitara(const char*przedr ,int aa = 0, int bb = 0, string nn = "default") : Instrument(), c(2)
+	{
+		if (przedr)
+		{
+
+			przedrostek = new char[strlen(przedr) + 1];
+			strcpy(przedrostek, przedr);
+
+			a = aa;
+			b = bb;
+			name = nn;
+		}
+
+		else if (przedr == NULL)
+		{
+
+			przedrostek = new char[1];
+			przedrostek = "\0";
+
+			a = aa;
+			b = bb;
+			name = nn;
+		}
+
+			
+	}
+
+	~Gitara()
+	{
+		cout << "Destrukacja pochodna" << endl;
+		if (przedrostek == NULL)
+			delete[1] przedrostek;
+		else if (przedrostek)
+			delete[] przedrostek;
+			
+	
+
+	}
+
+	void graj()
+	{
+		cout << " riff " << endl;
+	}
+
+	void wyswietl()
+	{	
+		cout << "nazwa: " << name << endl;
+		cout << "ID: " << przedrostek << a << b << endl; 
+	}
+};
+int main()
+{
+	Instrument *ptr;
+	ptr = new Gitara("FX",1,2,"Ibanez");
+	
+	ptr->graj();
+	ptr->wyswietl();
+	cout << "Array " << endl;
+
+	array < int, 4 > tablica = { 1 };
+	for (size_t i = 0; i < tablica.size(); ++i)
+		printf("%d\n", tablica[i]);
+
+	cout << "Koniec" << endl;
+
+	delete ptr;
+
+	return 0;
+}
